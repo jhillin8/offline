@@ -8,7 +8,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Resend({
       apiKey: process.env.RESEND_API_KEY,
-      from: 'Offline <noreply@offlinelux.com>',
+      from: 'Offline <onboarding@resend.dev>', // TODO: Change back to noreply@offlinelux.com after DNS verified
     }),
   ],
   pages: {
