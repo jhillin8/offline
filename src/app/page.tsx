@@ -4,7 +4,17 @@ import React, { useState } from 'react';
 import { ModuleId } from '@/lib/types';
 import Sidebar from '@/components/Sidebar';
 import UnloadModule from '@/components/UnloadModule';
-import PlaceholderModule from '@/components/PlaceholderModule';
+import {
+  UnderstandModule,
+  UnfollowModule,
+  UnmuteModule,
+  UnclutterModule,
+  UninstallModule,
+  UnsubscribeModule,
+  UnplugModule,
+  UnlockModule,
+  UnburdenedModule
+} from '@/components/modules';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -13,6 +23,38 @@ export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
+  const handleNavigate = (id: ModuleId) => {
+    setActiveModule(id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const renderModule = () => {
+    switch (activeModule) {
+      case ModuleId.UNLOAD:
+        return <UnloadModule />;
+      case ModuleId.UNDERSTAND:
+        return <UnderstandModule onNavigate={handleNavigate} />;
+      case ModuleId.UNFOLLOW:
+        return <UnfollowModule onNavigate={handleNavigate} />;
+      case ModuleId.UNMUTE:
+        return <UnmuteModule onNavigate={handleNavigate} />;
+      case ModuleId.UNCLUTTER:
+        return <UnclutterModule onNavigate={handleNavigate} />;
+      case ModuleId.UNINSTALL:
+        return <UninstallModule onNavigate={handleNavigate} />;
+      case ModuleId.UNSUBSCRIBE:
+        return <UnsubscribeModule onNavigate={handleNavigate} />;
+      case ModuleId.UNPLUG:
+        return <UnplugModule onNavigate={handleNavigate} />;
+      case ModuleId.UNLOCK:
+        return <UnlockModule onNavigate={handleNavigate} />;
+      case ModuleId.UNBURDENED:
+        return <UnburdenedModule />;
+      default:
+        return <UnloadModule />;
+    }
+  };
 
   return (
     <div className="flex h-screen bg-cream overflow-hidden">
@@ -30,6 +72,7 @@ export default function Home() {
         onSelectModule={(id) => {
           setActiveModule(id);
           setSidebarOpen(false);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
         isOpen={sidebarOpen}
         toggleSidebar={toggleSidebar}
@@ -45,11 +88,7 @@ export default function Home() {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
             >
-              {activeModule === ModuleId.UNLOAD ? (
-                <UnloadModule />
-              ) : (
-                <PlaceholderModule id={activeModule} />
-              )}
+              {renderModule()}
             </motion.div>
           </AnimatePresence>
         </div>
