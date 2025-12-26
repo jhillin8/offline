@@ -18,15 +18,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     error: '/login?error=1',
   },
   callbacks: {
-    async session({ session, user }) {
-      if (session.user && user?.email) {
-        session.user.email = user.email;
+    async jwt({ token, user }) {
+      if (user) {
+        token.email = user.email;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user && token?.email) {
+        session.user.email = token.email as string;
       }
       return session;
     },
   },
   session: {
-    strategy: 'database',
+    strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
 });
