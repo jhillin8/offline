@@ -67,37 +67,46 @@ const UnloadModule: React.FC<UnloadModuleProps> = ({ onNavigate }) => {
         label="Begin here"
       />
 
-      {/* There is nothing to do here */}
-      <ContentSection title="There is nothing to do here.">
-        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+      {/* SECTION 1: Permission/Expectations - Light, spacious */}
+      <ContentSection
+        title="There is nothing to do here."
+        emphasis="important"
+        separator="line"
+      >
+        <p className="font-sans text-lg md:text-xl text-offline-gray leading-relaxed mb-5">
           You don't need to change your phone.
         </p>
-        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+        <p className="font-sans text-lg md:text-xl text-offline-gray leading-relaxed mb-5">
           You don't need to delete anything.
         </p>
-        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+        <p className="font-sans text-lg md:text-xl text-offline-gray leading-relaxed mb-5">
           You don't need a plan.
         </p>
-        <p className="font-sans text-lg text-offline-black leading-relaxed font-medium mb-4">
+        <p className="font-sans text-xl md:text-2xl text-offline-black leading-tight font-medium mb-5">
           For this section, all you need to do is read.
         </p>
-        <p className="font-sans text-offline-gray">
+        <p className="font-sans text-lg text-offline-gray">
           Most guides rush you into action. This one starts by letting something go.
         </p>
       </ContentSection>
 
-      {/* If this year felt heavier */}
-      <ContentSection title="If this year felt heavier than it should have">
-        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+      {/* SECTION 2: Problem Identification - Elevated container, grounded */}
+      <ContentSection
+        title="If this year felt heavier than it should have"
+        variant="elevated"
+        emphasis="important"
+        separator="dots"
+      >
+        <p className="font-sans text-lg md:text-xl text-offline-gray leading-relaxed mb-5">
           Even on days that were technically "fine."
         </p>
-        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+        <p className="font-sans text-lg md:text-xl text-offline-gray leading-relaxed mb-5">
           Even when nothing was actively wrong.
         </p>
-        <p className="font-sans text-lg text-offline-black leading-relaxed font-medium mb-6">
+        <p className="font-sans text-xl md:text-2xl text-offline-black leading-tight font-medium mb-8">
           That's not a personal failure.
         </p>
-        <p className="font-sans text-offline-gray mb-4">
+        <p className="font-sans text-lg text-offline-gray mb-5">
           It's what happens when too many things have quiet access to you:
         </p>
         <BulletList
@@ -111,29 +120,33 @@ const UnloadModule: React.FC<UnloadModuleProps> = ({ onNavigate }) => {
             'background decisions'
           ]}
         />
-        <p className="font-sans text-lg text-offline-gray leading-relaxed mt-6">
+        <p className="font-sans text-lg text-offline-gray leading-relaxed mt-8">
           None of them are emergencies.
         </p>
-        <p className="font-sans text-lg text-offline-black leading-relaxed font-medium">
+        <p className="font-sans text-xl md:text-2xl text-offline-black leading-tight font-medium mt-2">
           Together, they become weight.
         </p>
       </ContentSection>
 
-      {/* You are not behind */}
-      <ContentSection title="You are not behind.">
-        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+      {/* SECTION 3: Reassurance/Pivot - Highlighted, emotional */}
+      <ContentSection
+        title="You are not behind."
+        variant="highlight"
+        emphasis="climactic"
+      >
+        <p className="font-sans text-lg md:text-xl text-offline-gray leading-relaxed mb-5">
           If your attention feels scattered...
         </p>
-        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+        <p className="font-sans text-lg md:text-xl text-offline-gray leading-relaxed mb-5">
           If your phone feels louder than it used to...
         </p>
-        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-6">
+        <p className="font-sans text-lg md:text-xl text-offline-gray leading-relaxed mb-8">
           If rest doesn't fully restore you...
         </p>
-        <p className="font-sans text-lg text-offline-black leading-relaxed font-medium mb-4">
+        <p className="font-sans text-xl md:text-2xl text-offline-black leading-tight font-medium mb-5">
           That doesn't mean something is wrong with you.
         </p>
-        <p className="font-sans text-offline-gray">
+        <p className="font-sans text-lg md:text-xl text-offline-gray">
           It means your environment has been asking too much, too often, for too long.
         </p>
       </ContentSection>

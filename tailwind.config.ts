@@ -31,6 +31,7 @@ const config: Config = {
         'breath-md': '4rem',
         'breath-lg': '6rem',
         'breath-xl': '8rem',
+        'breath-section': '10rem',  // Conceptual section breaks
         'breath-2xl': '12rem',
         'breath-3xl': '16rem',
       },
