@@ -1,7 +1,10 @@
 import NextAuth from 'next-auth';
 import Resend from 'next-auth/providers/resend';
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import { prisma } from './prisma';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  adapter: PrismaAdapter(prisma),
   providers: [
     Resend({
       apiKey: process.env.RESEND_API_KEY,
@@ -14,21 +17,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     error: '/login?error=1',
   },
   callbacks: {
-    async jwt({ token, user }) {
-      if (user?.email) {
-        token.email = user.email;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (session.user && token.email) {
-        session.user.email = token.email as string;
+    async session({ session, user }) {
+      if (session.user && user?.email) {
+        session.user.email = user.email;
       }
       return session;
     },
   },
   session: {
-    strategy: 'jwt',
+    strategy: 'database',
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
 });
