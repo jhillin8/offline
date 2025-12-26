@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   ModuleHeader,
@@ -11,16 +11,61 @@ import {
   staggerChildren,
   fadeInUp
 } from '@/components/module';
+import ShareButton from '@/components/ShareButton';
+
+const Confetti: React.FC = () => {
+  const [particles, setParticles] = useState<Array<{ id: number; x: number; delay: number; color: string }>>([]);
+
+  useEffect(() => {
+    const colors = ['#D94F2B', '#1A1A1A', '#888888'];
+    const newParticles = Array.from({ length: 30 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      delay: Math.random() * 0.5,
+      color: colors[Math.floor(Math.random() * colors.length)],
+    }));
+    setParticles(newParticles);
+  }, []);
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          initial={{ y: -20, x: `${p.x}vw`, opacity: 1 }}
+          animate={{ y: '100vh', opacity: 0 }}
+          transition={{ duration: 3, delay: p.delay, ease: 'easeOut' }}
+          className="absolute w-2 h-2 rounded-full"
+          style={{ backgroundColor: p.color }}
+        />
+      ))}
+    </div>
+  );
+};
 
 const UnburdenedModule: React.FC = () => {
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  useEffect(() => {
+    // Check if we've shown confetti before
+    const hasSeenConfetti = localStorage.getItem('offline_confetti_shown');
+    if (!hasSeenConfetti) {
+      setShowConfetti(true);
+      localStorage.setItem('offline_confetti_shown', 'true');
+      // Hide after animation
+      setTimeout(() => setShowConfetti(false), 4000);
+    }
+  }, []);
   return (
-    <motion.div
-      initial="initial"
-      animate="animate"
-      variants={staggerChildren}
-      className="max-w-3xl mx-auto pb-24"
-    >
-      <ModuleHeader
+    <>
+      {showConfetti && <Confetti />}
+      <motion.div
+        initial="initial"
+        animate="animate"
+        variants={staggerChildren}
+        className="max-w-3xl mx-auto pb-24"
+      >
+        <ModuleHeader
         number="10"
         title="UNBURDENED"
         description="This is how you live now. You didn't fix yourself. You returned to yourself."
@@ -181,12 +226,14 @@ const UnburdenedModule: React.FC = () => {
       </motion.div>
 
       {/* Final */}
-      <motion.div variants={fadeInUp} className="text-center py-16 border-t border-offline-border/40">
-        <p className="font-serif text-4xl md:text-5xl text-offline-red">
-          You're unburdened.
-        </p>
+        <motion.div variants={fadeInUp} className="text-center py-16 border-t border-offline-border/40">
+          <p className="font-serif text-4xl md:text-5xl text-offline-red mb-8">
+            You're unburdened.
+          </p>
+          <ShareButton className="inline-flex justify-center" />
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </>
   );
 };
 

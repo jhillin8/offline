@@ -76,6 +76,19 @@ const UnlockModule: React.FC<UnlockModuleProps> = ({ onNavigate }) => {
         label="Permanence begins"
       />
 
+      {/* Bridging context */}
+      <ContentSection title="Everything you removed created space.">
+        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+          You unfollowed. You unmuted. You uncluttered. You unsubscribed. You unplugged.
+        </p>
+        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+          But space doesn't stay empty on its own.
+        </p>
+        <p className="font-sans text-lg text-offline-black leading-relaxed font-medium">
+          Now we anchor it — with defaults that keep old patterns from silently returning.
+        </p>
+      </ContentSection>
+
       {/* Nothing drifts back */}
       <ContentSection title="Nothing drifts back by accident.">
         <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">

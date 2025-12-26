@@ -42,8 +42,8 @@ const UnsubscribeModule: React.FC<UnsubscribeModuleProps> = ({ onNavigate }) => 
         label="Completion begins"
       />
 
-      {/* Nothing here is urgent */}
-      <ContentSection>
+      {/* What you didn't know was draining */}
+      <ContentSection title="What you didn't know was draining.">
         <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
           Promotional emails. Newsletters you never read. Subscriptions you forgot you agreed to.
         </p>
@@ -207,7 +207,10 @@ const UnsubscribeModule: React.FC<UnsubscribeModuleProps> = ({ onNavigate }) => 
       </ContentSection>
 
       <ModuleTransition
-        closingLines={["You don't need to stay informed about everything."]}
+        closingLines={[
+          "You don't need to stay informed about everything.",
+          "Now that you've closed the leaks, we'll design what fills that space."
+        ]}
         nextModule={ModuleId.UNPLUG}
         nextNumber="8"
         onNavigate={onNavigate}

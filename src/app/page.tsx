@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ModuleId } from '@/lib/types';
+import { loadProgress, saveProgress, markModuleComplete } from '@/lib/persistence';
 import Sidebar from '@/components/Sidebar';
 import UnloadModule from '@/components/UnloadModule';
 import {
@@ -20,19 +21,43 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Home() {
   const [activeModule, setActiveModule] = useState<ModuleId>(ModuleId.UNLOAD);
+  const [completedModules, setCompletedModules] = useState<ModuleId[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const mainRef = useRef<HTMLElement>(null);
+
+  // Load progress on mount
+  useEffect(() => {
+    const progress = loadProgress();
+    setActiveModule(progress.activeModule);
+    setCompletedModules(progress.completedModules);
+  }, []);
+
+  // Save progress when module changes
+  useEffect(() => {
+    saveProgress({ activeModule, completedModules });
+  }, [activeModule, completedModules]);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
+  const scrollToTop = () => {
+    mainRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleNavigate = (id: ModuleId) => {
+    // Mark current module as complete when navigating away
+    if (!completedModules.includes(activeModule)) {
+      const updated = [...completedModules, activeModule];
+      setCompletedModules(updated);
+      markModuleComplete(activeModule);
+    }
     setActiveModule(id);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToTop();
   };
 
   const renderModule = () => {
     switch (activeModule) {
       case ModuleId.UNLOAD:
-        return <UnloadModule />;
+        return <UnloadModule onNavigate={handleNavigate} />;
       case ModuleId.UNDERSTAND:
         return <UnderstandModule onNavigate={handleNavigate} />;
       case ModuleId.UNFOLLOW:
@@ -52,7 +77,7 @@ export default function Home() {
       case ModuleId.UNBURDENED:
         return <UnburdenedModule />;
       default:
-        return <UnloadModule />;
+        return <UnloadModule onNavigate={handleNavigate} />;
     }
   };
 
@@ -69,16 +94,22 @@ export default function Home() {
 
       <Sidebar
         activeModule={activeModule}
+        completedModules={completedModules}
         onSelectModule={(id) => {
+          if (!completedModules.includes(activeModule)) {
+            const updated = [...completedModules, activeModule];
+            setCompletedModules(updated);
+            markModuleComplete(activeModule);
+          }
           setActiveModule(id);
           setSidebarOpen(false);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          scrollToTop();
         }}
         isOpen={sidebarOpen}
         toggleSidebar={toggleSidebar}
       />
 
-      <main className="flex-1 h-full overflow-y-auto pt-20 md:pt-0 scroll-smooth">
+      <main ref={mainRef} className="flex-1 h-full overflow-y-auto pt-20 md:pt-0 scroll-smooth">
         <div className="max-w-5xl mx-auto px-6 md:px-12 py-12 md:py-16">
           <AnimatePresence mode="wait">
             <motion.div

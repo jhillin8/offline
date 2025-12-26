@@ -2,12 +2,27 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Loader2, Sparkles, X } from 'lucide-react';
+import { Sparkles, Loader2 } from 'lucide-react';
+import {
+  ModuleHeader,
+  PermissionQuote,
+  ContentSection,
+  BulletList,
+  QuietTruth,
+  ModuleTransition,
+  staggerChildren,
+  fadeInUp
+} from '@/components/module';
+import { ModuleId } from '@/lib/types';
 
-const UnloadModule: React.FC = () => {
+interface UnloadModuleProps {
+  onNavigate: (id: ModuleId) => void;
+}
+
+const UnloadModule: React.FC<UnloadModuleProps> = ({ onNavigate }) => {
   const [inputs, setInputs] = useState({
     noisy: '',
-    drains: '',
+    draining: '',
     leaveBehind: ''
   });
   const [reflection, setReflection] = useState<string | null>(null);
@@ -18,7 +33,7 @@ const UnloadModule: React.FC = () => {
   };
 
   const handleReflect = async () => {
-    if (!inputs.noisy && !inputs.drains && !inputs.leaveBehind) return;
+    if (!inputs.noisy && !inputs.draining && !inputs.leaveBehind) return;
     setIsLoading(true);
     try {
       const response = await fetch('/api/reflect', {
@@ -34,20 +49,6 @@ const UnloadModule: React.FC = () => {
     setIsLoading(false);
   };
 
-  const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
-  };
-
-  const staggerChildren = {
-    animate: {
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
   return (
     <motion.div
       initial="initial"
@@ -55,134 +56,190 @@ const UnloadModule: React.FC = () => {
       variants={staggerChildren}
       className="max-w-3xl mx-auto pb-24"
     >
-      {/* Header */}
-      <motion.div variants={fadeInUp} className="mb-16">
-        <span className="font-mono text-xs text-offline-red tracking-widest uppercase mb-4 block">Module 01</span>
-        <h1 className="font-serif text-5xl md:text-6xl text-offline-black mb-6">UNLOAD</h1>
-        <p className="font-sans text-lg text-offline-gray leading-relaxed max-w-xl">
-          Job is emotional readiness, not behavior change. Lower defenses. Reduce shame. Create psychological safety.
+      <ModuleHeader
+        number="01"
+        title="UNLOAD"
+        description="Permission to Stop Carrying"
+      />
+
+      <PermissionQuote
+        lines={["You don't need to fix anything yet."]}
+        label="Begin here"
+      />
+
+      {/* There is nothing to do here */}
+      <ContentSection title="There is nothing to do here.">
+        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+          You don't need to change your phone.
+        </p>
+        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+          You don't need to delete anything.
+        </p>
+        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+          You don't need a plan.
+        </p>
+        <p className="font-sans text-lg text-offline-black leading-relaxed font-medium mb-4">
+          For this section, all you need to do is read.
+        </p>
+        <p className="font-sans text-offline-gray">
+          Most guides rush you into action. This one starts by letting something go.
+        </p>
+      </ContentSection>
+
+      {/* If this year felt heavier */}
+      <ContentSection title="If this year felt heavier than it should have">
+        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+          Even on days that were technically "fine."
+        </p>
+        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+          Even when nothing was actively wrong.
+        </p>
+        <p className="font-sans text-lg text-offline-black leading-relaxed font-medium mb-6">
+          That's not a personal failure.
+        </p>
+        <p className="font-sans text-offline-gray mb-4">
+          It's what happens when too many things have quiet access to you:
+        </p>
+        <BulletList
+          items={[
+            'messages',
+            'feeds',
+            'updates',
+            'requests',
+            'reminders',
+            'unfinished tabs',
+            'background decisions'
+          ]}
+        />
+        <p className="font-sans text-lg text-offline-gray leading-relaxed mt-6">
+          None of them are emergencies.
+        </p>
+        <p className="font-sans text-lg text-offline-black leading-relaxed font-medium">
+          Together, they become weight.
+        </p>
+      </ContentSection>
+
+      {/* You are not behind */}
+      <ContentSection title="You are not behind.">
+        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+          If your attention feels scattered...
+        </p>
+        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+          If your phone feels louder than it used to...
+        </p>
+        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-6">
+          If rest doesn't fully restore you...
+        </p>
+        <p className="font-sans text-lg text-offline-black leading-relaxed font-medium mb-4">
+          That doesn't mean something is wrong with you.
+        </p>
+        <p className="font-sans text-offline-gray">
+          It means your environment has been asking too much, too often, for too long.
+        </p>
+      </ContentSection>
+
+      {/* Years don't reset attention */}
+      <motion.div variants={fadeInUp} className="mb-20 py-12 bg-cream text-center">
+        <h3 className="font-serif text-3xl md:text-4xl text-offline-black leading-tight mb-4">
+          Years don't reset attention.
+        </h3>
+        <p className="font-sans text-lg text-offline-gray mb-4">
+          January doesn't clear mental clutter.
+        </p>
+        <p className="font-sans text-lg text-offline-gray mb-6">
+          A new calendar doesn't remove old defaults.
+        </p>
+        <p className="font-sans text-offline-gray mb-4">
+          If nothing changes, most people carry the same digital noise into the next year — just with a new label.
+        </p>
+        <p className="font-sans text-offline-black font-medium">
+          This isn't a warning. It's an observation. And it's why this guide exists.
         </p>
       </motion.div>
 
-      {/* Avoid Section */}
-      <motion.div variants={fadeInUp} className="mb-16 p-8 bg-white border border-offline-border rounded-xl shadow-sm">
-        <h2 className="font-serif text-2xl text-offline-black mb-6">What to avoid in UNLOAD</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {['Tips', 'Advice', 'Explanations', 'Frameworks', '"Here\'s what we\'ll do"'].map((item) => (
-            <div key={item} className="flex items-center gap-3 text-offline-gray">
-              <X className="w-4 h-4 text-offline-red opacity-60" />
-              <span className="font-sans text-sm">{item}</span>
-            </div>
-          ))}
-        </div>
-      </motion.div>
+      {/* Before we clean anything */}
+      <ContentSection title="Before we clean anything, we unload.">
+        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+          Not by fixing. Not by optimizing. Not by improving.
+        </p>
+        <p className="font-sans text-lg text-offline-black leading-relaxed font-medium mb-4">
+          By naming.
+        </p>
+        <p className="font-sans text-offline-gray">
+          Because you can't put something down if you haven't noticed you're holding it.
+        </p>
+      </ContentSection>
 
-      {/* Section A: Permission */}
+      {/* A quiet moment - Exercise */}
       <motion.div variants={fadeInUp} className="mb-20">
-        <div className="pl-6 border-l-2 border-offline-red/30 space-y-6">
-          <p className="font-serif text-2xl md:text-3xl italic text-offline-black leading-tight">
-            "You don't need to fix everything.
-          </p>
-          <p className="font-serif text-2xl md:text-3xl italic text-offline-black leading-tight">
-            You don't need to quit technology.
-          </p>
-          <p className="font-serif text-2xl md:text-3xl italic text-offline-black leading-tight">
-            You don't need more discipline."
-          </p>
-        </div>
-        <p className="mt-4 text-sm text-offline-gray font-mono uppercase tracking-wide">Permission Granted</p>
-      </motion.div>
-
-      {/* Section B: Normalize */}
-      <motion.div variants={fadeInUp} className="mb-20">
-        <h3 className="font-serif text-2xl text-offline-black mb-8">Normalize the exhaustion</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-4">
-            <h4 className="font-sans text-xs font-semibold uppercase text-offline-gray tracking-widest">How it feels</h4>
-            <ul className="space-y-3">
-              {['Mentally tired even after rest', 'Constant low-level noise in the mind', 'Reaching for the phone without deciding', 'Feeling behind without knowing why'].map(item => (
-                <li key={item} className="flex items-start gap-3 text-offline-black/80">
-                  <span className="w-1.5 h-1.5 bg-offline-black/20 rounded-full mt-2" />
-                  <span className="leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="space-y-4 opacity-50">
-            <h4 className="font-sans text-xs font-semibold uppercase text-offline-gray tracking-widest">Avoid these words</h4>
-            <ul className="space-y-3">
-              {['Addiction', 'Dopamine', 'Broken attention'].map(item => (
-                <li key={item} className="flex items-start gap-3 text-offline-gray line-through decoration-offline-red/40">
-                  <span className="leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Section C: Reframe */}
-      <motion.div variants={fadeInUp} className="mb-20 py-12 bg-cream text-center relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-offline-border/20 pointer-events-none" />
-        <h3 className="relative font-serif text-3xl md:text-4xl text-offline-black leading-tight mb-4">
-          Years don't reset attention.
-        </h3>
-        <h3 className="relative font-serif text-3xl md:text-4xl text-offline-red leading-tight">
-          Only decisions do.
-        </h3>
-      </motion.div>
-
-      {/* Section D: Nothing to do */}
-      <motion.div variants={fadeInUp} className="mb-20 flex justify-center">
-        <div className="bg-white px-8 py-6 rounded-full border border-offline-border shadow-sm flex items-center gap-4">
-          <div className="w-2 h-2 bg-offline-red rounded-full animate-pulse" />
-          <p className="font-sans text-sm text-offline-gray">There is nothing to do in this section. Just read.</p>
-        </div>
-      </motion.div>
-
-      {/* Section E: Exercise */}
-      <motion.div variants={fadeInUp} className="mb-20">
-        <div className="flex items-center gap-3 mb-8">
+        <div className="flex items-center gap-3 mb-2">
           <Sparkles className="w-5 h-5 text-offline-red" />
-          <h3 className="font-serif text-2xl text-offline-black">Mental Download</h3>
+          <h3 className="font-serif text-2xl text-offline-black">A quiet moment</h3>
         </div>
+        <p className="font-mono text-xs text-offline-gray mb-6">5 minutes</p>
 
-        <div className="space-y-8 bg-white p-8 md:p-10 rounded-2xl border border-offline-border shadow-sm relative overflow-hidden">
+        <div className="bg-white p-8 rounded-2xl border border-offline-border shadow-sm">
+          <div className="mb-6 p-4 bg-cream/50 rounded-lg border border-offline-border/30">
+            <p className="font-sans text-xs text-offline-gray">
+              <span className="font-medium text-offline-black">Your privacy:</span> Nothing you write here is stored, tracked, or sent anywhere. This guide exists only in your browser, for your eyes only.
+            </p>
+          </div>
+          <p className="font-sans text-offline-gray mb-4">
+            If now isn't a good time, skip this and come back later. Nothing breaks if you don't do it immediately.
+          </p>
+          <p className="font-sans text-offline-black mb-6">
+            If you're ready, answer these three prompts — briefly, without editing:
+          </p>
 
-          <div className="space-y-2">
-            <label className="block font-sans text-sm font-medium text-offline-black">What feels noisy right now?</label>
-            <textarea
-              value={inputs.noisy}
-              onChange={(e) => handleInputChange('noisy', e.target.value)}
-              className="w-full bg-cream border-0 rounded-lg p-4 text-offline-black focus:ring-1 focus:ring-offline-gray/50 resize-none h-24 placeholder:text-offline-gray/40 transition-all"
-              placeholder="e.g., The constant notifications, the unfinished projects..."
-            />
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <label className="block font-sans text-sm font-medium text-offline-black">
+                1. What feels noisy right now?
+              </label>
+              <p className="text-xs text-offline-gray mb-2">Not what you should feel. What you actually feel.</p>
+              <textarea
+                value={inputs.noisy}
+                onChange={(e) => handleInputChange('noisy', e.target.value)}
+                className="w-full bg-cream border-0 rounded-lg p-4 text-offline-black focus:ring-2 focus:ring-offline-red focus:outline-none resize-none h-24 placeholder:text-offline-gray/40 transition-shadow"
+                placeholder="Write freely..."
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block font-sans text-sm font-medium text-offline-black">
+                2. What feels digitally draining?
+              </label>
+              <p className="text-xs text-offline-gray mb-2">Not what's "bad." What leaves you a little more tired afterward.</p>
+              <textarea
+                value={inputs.draining}
+                onChange={(e) => handleInputChange('draining', e.target.value)}
+                className="w-full bg-cream border-0 rounded-lg p-4 text-offline-black focus:ring-2 focus:ring-offline-red focus:outline-none resize-none h-24 placeholder:text-offline-gray/40 transition-shadow"
+                placeholder="Write freely..."
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block font-sans text-sm font-medium text-offline-black">
+                3. What do you not want to carry into the next year?
+              </label>
+              <p className="text-xs text-offline-gray mb-2">Be honest. You don't owe this answer to anyone.</p>
+              <textarea
+                value={inputs.leaveBehind}
+                onChange={(e) => handleInputChange('leaveBehind', e.target.value)}
+                className="w-full bg-cream border-0 rounded-lg p-4 text-offline-black focus:ring-2 focus:ring-offline-red focus:outline-none resize-none h-24 placeholder:text-offline-gray/40 transition-shadow"
+                placeholder="Write freely..."
+              />
+            </div>
           </div>
 
-          <div className="space-y-2">
-            <label className="block font-sans text-sm font-medium text-offline-black">What drains me digitally?</label>
-            <textarea
-              value={inputs.drains}
-              onChange={(e) => handleInputChange('drains', e.target.value)}
-              className="w-full bg-cream border-0 rounded-lg p-4 text-offline-black focus:ring-1 focus:ring-offline-gray/50 resize-none h-24 placeholder:text-offline-gray/40 transition-all"
-              placeholder="e.g., doomscrolling at night, email first thing in the morning..."
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label className="block font-sans text-sm font-medium text-offline-black">What do I not want to bring into 2025?</label>
-            <textarea
-              value={inputs.leaveBehind}
-              onChange={(e) => handleInputChange('leaveBehind', e.target.value)}
-              className="w-full bg-cream border-0 rounded-lg p-4 text-offline-black focus:ring-1 focus:ring-offline-gray/50 resize-none h-24 placeholder:text-offline-gray/40 transition-all"
-              placeholder="e.g., The feeling of always being reachable..."
-            />
-          </div>
+          <p className="font-sans text-sm text-offline-gray mt-6 text-center">
+            You're not solving anything yet. You're just unloading.
+          </p>
 
           <div className="pt-4 flex justify-end">
             <button
               onClick={handleReflect}
-              disabled={isLoading || (!inputs.noisy && !inputs.drains && !inputs.leaveBehind)}
+              disabled={isLoading || (!inputs.noisy && !inputs.draining && !inputs.leaveBehind)}
               className="bg-offline-black text-white px-6 py-2 rounded-full font-sans text-sm hover:bg-offline-black/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
             >
               {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Reflect'}
@@ -195,26 +252,62 @@ const UnloadModule: React.FC = () => {
               animate={{ opacity: 1, height: 'auto' }}
               className="mt-6 p-6 bg-cream rounded-xl border border-offline-border/50"
             >
-              <h4 className="font-serif text-lg text-offline-black mb-2">Reflection</h4>
               <p className="font-sans text-offline-gray leading-relaxed">{reflection}</p>
             </motion.div>
           )}
-
         </div>
       </motion.div>
 
-      {/* Section F: Closing */}
-      <motion.div variants={fadeInUp} className="text-center py-16 border-t border-offline-border/40">
-        <p className="font-serif text-2xl text-offline-black italic mb-2">"You don't need clarity yet.</p>
-        <p className="font-serif text-2xl text-offline-black italic">Just honesty."</p>
+      {/* Stop when you feel done */}
+      <ContentSection title="Stop when you feel done.">
+        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+          You don't need clarity.
+        </p>
+        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
+          You don't need a breakthrough.
+        </p>
+        <p className="font-sans text-lg text-offline-gray leading-relaxed mb-6">
+          You don't need to reach a conclusion.
+        </p>
+        <p className="font-sans text-lg text-offline-black leading-relaxed font-medium mb-4">
+          If something shifted — even slightly — that's enough.
+        </p>
+        <p className="font-sans text-offline-gray">
+          If nothing shifted, that's also fine. This guide works even when you're tired.
+        </p>
+      </ContentSection>
 
-        <div className="mt-12">
-          <button className="text-xs font-mono uppercase tracking-widest text-offline-gray hover:text-offline-red transition-colors">
-            Continue to Part 2 &rarr;
-          </button>
-        </div>
+      <QuietTruth
+        lines={[
+          "Nothing you named means you failed.",
+          "Nothing you named means you're weak.",
+          "It just means you've been responsive in a world that constantly asks for response."
+        ]}
+        highlight={2}
+      />
+
+      {/* The goal */}
+      <motion.div variants={fadeInUp} className="mb-20 py-12 text-center">
+        <p className="font-sans text-lg text-offline-gray mb-2">The goal here isn't control.</p>
+        <p className="font-serif text-3xl text-offline-red">It's relief.</p>
       </motion.div>
 
+      {/* Take a breath */}
+      <ContentSection title="Take a breath.">
+        <p className="font-sans text-lg text-offline-black leading-relaxed font-medium mb-4">
+          You don't need to carry everything at once.
+        </p>
+        <p className="font-sans text-offline-gray">
+          Next, we'll gently re-orient — not to explain what's wrong, but to remove blame from the picture entirely.
+        </p>
+      </ContentSection>
+
+      <ModuleTransition
+        closingLines={["You don't need clarity yet.", "Just honesty."]}
+        nextModule={ModuleId.UNDERSTAND}
+        nextNumber="2"
+        onNavigate={onNavigate}
+      />
     </motion.div>
   );
 };
