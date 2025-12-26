@@ -7,6 +7,7 @@ export { ActionBlock } from './ActionBlock';
 export { QuietTruth } from './QuietTruth';
 export { ModuleTransition } from './ModuleTransition';
 export { ReflectionForm } from './ReflectionForm';
+export { Divider } from './Divider';
 
 // Animation variants
 export { fadeInUp, staggerChildren, fadeIn } from './animations';

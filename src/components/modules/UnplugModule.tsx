@@ -11,6 +11,7 @@ import {
   ActionBlock,
   QuietTruth,
   ModuleTransition,
+  Divider,
   staggerChildren,
   fadeInUp
 } from '@/components/module';
@@ -81,6 +82,8 @@ const UnplugModule: React.FC<UnplugModuleProps> = ({ onNavigate }) => {
           UNPLUG ends that loop.
         </p>
       </ContentSection>
+
+      <Divider />
 
       {/* Rules vs Walls */}
       <motion.div variants={fadeInUp} className="mb-20">
@@ -261,6 +264,8 @@ const UnplugModule: React.FC<UnplugModuleProps> = ({ onNavigate }) => {
         highlight={0}
       />
 
+      <Divider />
+
       {/* What may happen */}
       <ContentSection title="What may happen next">
         <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
@@ -270,6 +275,8 @@ const UnplugModule: React.FC<UnplugModuleProps> = ({ onNavigate }) => {
           That's not loss. That's space.
         </p>
       </ContentSection>
+
+      <Divider />
 
       {/* Don't add more */}
       <ContentSection title="Don't add more walls.">

@@ -8,6 +8,7 @@ import {
   ContentSection,
   BulletList,
   QuietTruth,
+  Divider,
   staggerChildren,
   fadeInUp
 } from '@/components/module';
@@ -100,6 +101,8 @@ const UnburdenedModule: React.FC = () => {
         </p>
       </ContentSection>
 
+      <Divider />
+
       {/* Not a transformation story */}
       <ContentSection title="This isn't a transformation story.">
         <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
@@ -120,6 +123,8 @@ const UnburdenedModule: React.FC = () => {
           That's it. And that's enough.
         </p>
       </ContentSection>
+
+      <Divider />
 
       {/* Who you are now */}
       <motion.div variants={fadeInUp} className="mb-20 p-8 bg-white border border-offline-border rounded-xl">
@@ -143,6 +148,8 @@ const UnburdenedModule: React.FC = () => {
         </p>
       </motion.div>
 
+      <Divider />
+
       {/* Maintenance */}
       <ContentSection title="Maintenance is rare — and light.">
         <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
@@ -163,6 +170,8 @@ const UnburdenedModule: React.FC = () => {
           Maintenance isn't failure. It's care.
         </p>
       </ContentSection>
+
+      <Divider />
 
       {/* If you slip */}
       <ContentSection title="If you slip">
@@ -199,6 +208,8 @@ const UnburdenedModule: React.FC = () => {
         highlight={1}
       />
 
+      <Divider />
+
       {/* Close the loop */}
       <ContentSection title="Close the loop">
         <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
@@ -208,6 +219,8 @@ const UnburdenedModule: React.FC = () => {
           Because you stopped carrying what wasn't yours.
         </p>
       </ContentSection>
+
+      <Divider />
 
       {/* Nothing left to do */}
       <motion.div variants={fadeInUp} className="mb-20 py-16 text-center">

@@ -11,6 +11,7 @@ import {
   ActionBlock,
   QuietTruth,
   ModuleTransition,
+  Divider,
   staggerChildren,
   fadeInUp
 } from '@/components/module';
@@ -61,6 +62,8 @@ const UninstallModule: React.FC<UninstallModuleProps> = ({ onNavigate }) => {
           That's not failure. That's design doing what it was built to do.
         </p>
       </ContentSection>
+
+      <Divider />
 
       {/* Targeting reflex */}
       <ContentSection title="We're not targeting enjoyment.">
@@ -179,6 +182,8 @@ const UninstallModule: React.FC<UninstallModuleProps> = ({ onNavigate }) => {
         lines={["You're not giving something up.", "You're taking something back."]}
         highlight={1}
       />
+
+      <Divider />
 
       {/* What may happen */}
       <ContentSection title="What may happen next">

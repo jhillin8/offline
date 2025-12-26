@@ -11,6 +11,7 @@ import {
   ActionBlock,
   QuietTruth,
   ModuleTransition,
+  Divider,
   staggerChildren,
   fadeInUp
 } from '@/components/module';
@@ -61,6 +62,8 @@ const UnfollowModule: React.FC<UnfollowModuleProps> = ({ onNavigate }) => {
           This isn't about judgment. It's about noticing what your environment rehearses for you.
         </p>
       </ContentSection>
+
+      <Divider />
 
       {/* Three options */}
       <motion.div variants={fadeInUp} className="mb-20">
@@ -170,6 +173,8 @@ const UnfollowModule: React.FC<UnfollowModuleProps> = ({ onNavigate }) => {
         highlight={0}
       />
 
+      <Divider />
+
       {/* Discomfort */}
       <ContentSection title="If discomfort shows up">
         <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
@@ -182,6 +187,8 @@ const UnfollowModule: React.FC<UnfollowModuleProps> = ({ onNavigate }) => {
           It means you're noticing how much exposure mattered. Notice. Don't fix.
         </p>
       </ContentSection>
+
+      <Divider />
 
       {/* Closing */}
       <ContentSection title="Enough for now.">

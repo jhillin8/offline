@@ -11,6 +11,7 @@ import {
   ActionBlock,
   QuietTruth,
   ModuleTransition,
+  Divider,
   staggerChildren,
   fadeInUp
 } from '@/components/module';
@@ -248,6 +249,8 @@ const UnsubscribeModule: React.FC<UnsubscribeModuleProps> = ({ onNavigate }) => 
         highlight={1}
       />
 
+      <Divider />
+
       {/* Don't finish everything - climactic */}
       <ContentSection title="Don't finish everything." emphasis="climactic">
         <p className="font-sans text-lg md:text-xl text-offline-gray leading-relaxed mb-6">
@@ -260,6 +263,8 @@ const UnsubscribeModule: React.FC<UnsubscribeModuleProps> = ({ onNavigate }) => 
           Partial closure is still closure.
         </p>
       </ContentSection>
+
+      <Divider />
 
       {/* What may come up */}
       <ContentSection title="What may come up">

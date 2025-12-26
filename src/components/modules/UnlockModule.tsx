@@ -11,6 +11,7 @@ import {
   ActionBlock,
   QuietTruth,
   ModuleTransition,
+  Divider,
   staggerChildren,
   fadeInUp
 } from '@/components/module';
@@ -89,6 +90,8 @@ const UnlockModule: React.FC<UnlockModuleProps> = ({ onNavigate }) => {
         </p>
       </ContentSection>
 
+      <Divider />
+
       {/* Nothing drifts back */}
       <ContentSection title="Nothing drifts back by accident.">
         <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
@@ -109,6 +112,8 @@ const UnlockModule: React.FC<UnlockModuleProps> = ({ onNavigate }) => {
           Not because you chose them — but because they were waiting.
         </p>
       </ContentSection>
+
+      <Divider />
 
       {/* Your life runs on defaults */}
       <ContentSection title="Your life runs on defaults.">
@@ -243,6 +248,8 @@ const UnlockModule: React.FC<UnlockModuleProps> = ({ onNavigate }) => {
         highlight={1}
       />
 
+      <Divider />
+
       {/* Defaults = self-trust */}
       <motion.div variants={fadeInUp} className="mb-20 py-12 bg-cream text-center">
         <p className="font-serif text-2xl text-offline-black italic">
@@ -252,6 +259,8 @@ const UnlockModule: React.FC<UnlockModuleProps> = ({ onNavigate }) => {
           Freedom is rarely loud.
         </p>
       </motion.div>
+
+      <Divider />
 
       {/* Adjustments */}
       <ContentSection title="Adjustments have a place.">

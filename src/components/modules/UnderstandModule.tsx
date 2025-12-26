@@ -9,6 +9,7 @@ import {
   BulletList,
   QuietTruth,
   ModuleTransition,
+  Divider,
   staggerChildren,
   fadeInUp
 } from '@/components/module';
@@ -67,6 +68,8 @@ const UnderstandModule: React.FC<UnderstandModuleProps> = ({ onNavigate }) => {
         </p>
       </ContentSection>
 
+      <Divider />
+
       {/* The real cost */}
       <ContentSection title="The real cost isn't screen time.">
         <p className="font-sans text-lg text-offline-gray leading-relaxed mb-6">
@@ -87,6 +90,8 @@ const UnderstandModule: React.FC<UnderstandModuleProps> = ({ onNavigate }) => {
           That's why rest sometimes doesn't feel restorative.
         </p>
       </ContentSection>
+
+      <Divider />
 
       {/* This isn't about addiction */}
       <ContentSection title="This isn't about addiction.">
@@ -111,6 +116,8 @@ const UnderstandModule: React.FC<UnderstandModuleProps> = ({ onNavigate }) => {
         </p>
       </ContentSection>
 
+      <Divider />
+
       {/* Willpower */}
       <ContentSection title="Willpower was never the problem.">
         <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
@@ -126,6 +133,8 @@ const UnderstandModule: React.FC<UnderstandModuleProps> = ({ onNavigate }) => {
           That's not a character issue. It's physics.
         </p>
       </ContentSection>
+
+      <Divider variant="dots" />
 
       {/* Reframing */}
       <motion.div variants={fadeInUp} className="mb-20 p-8 bg-white border border-offline-border rounded-xl">
@@ -165,6 +174,8 @@ const UnderstandModule: React.FC<UnderstandModuleProps> = ({ onNavigate }) => {
         lines={['Access determines attention.', 'Attention shapes experience.']}
         highlight={1}
       />
+
+      <Divider />
 
       {/* Closing */}
       <ContentSection title="One important thing before we move on">

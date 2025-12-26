@@ -11,6 +11,7 @@ import {
   ActionBlock,
   QuietTruth,
   ModuleTransition,
+  Divider,
   staggerChildren,
   fadeInUp
 } from '@/components/module';
@@ -61,6 +62,8 @@ const UnmuteModule: React.FC<UnmuteModuleProps> = ({ onNavigate }) => {
           Not because anything is wrong — but because too many things are allowed to interrupt you.
         </p>
       </ContentSection>
+
+      <Divider />
 
       {/* Alerts are requests */}
       <ContentSection title="Alerts are requests, not commands.">
@@ -196,6 +199,8 @@ const UnmuteModule: React.FC<UnmuteModuleProps> = ({ onNavigate }) => {
         lines={["Silence isn't absence.", "It's sovereignty over your attention."]}
         highlight={1}
       />
+
+      <Divider />
 
       {/* What may happen */}
       <ContentSection title="What may happen next">

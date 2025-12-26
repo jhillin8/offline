@@ -11,6 +11,7 @@ import {
   ActionBlock,
   QuietTruth,
   ModuleTransition,
+  Divider,
   staggerChildren,
   fadeInUp
 } from '@/components/module';
@@ -185,6 +186,8 @@ const UnclutterModule: React.FC<UnclutterModuleProps> = ({ onNavigate }) => {
         highlight={1}
       />
 
+      <Divider />
+
       {/* Don't keep going */}
       <ContentSection title="Don't keep going.">
         <p className="font-sans text-lg text-offline-gray leading-relaxed mb-4">
@@ -194,6 +197,8 @@ const UnclutterModule: React.FC<UnclutterModuleProps> = ({ onNavigate }) => {
           Stop while it feels light.
         </p>
       </ContentSection>
+
+      <Divider />
 
       {/* What may come up */}
       <ContentSection title="What may come up">
